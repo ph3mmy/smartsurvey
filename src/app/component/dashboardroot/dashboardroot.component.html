@@ -1,0 +1,44 @@
+<div class="container text-center">
+  <div class="row flex-center">
+  <div class="col-sm-7">
+    <md-card style="padding: 0px">
+      <md-card-title style="padding-top: 10px"><h2>My Apps</h2></md-card-title>
+      <hr color="#333">
+      <md-card-content>
+
+        <table style="width:100%" cellspacing="0">
+          <tr>
+            <th></th>
+          </tr>
+          <tr>
+            <td style="padding: 20px" *ngIf="!loaded && appInfo.appname">
+              <md-grid-list cols="1" rowHeight="200px">
+                <md-grid-tile>
+                  <div class="app-name">
+                    <span id="example1">{{appInfo.appname}}</span>
+                  </div>
+                </md-grid-tile>
+              </md-grid-list>
+              <br>
+          <tr>
+            <button type="button" class="btn btn-primary btn-pill btn-sm" (click)="editWithId()">Edit</button>
+            <!--<button type="button" class="btn btn-outline-danger">Delete</button>-->
+            <button type="button" class="btn btn-secondary btn-sm" (click)="openConfirmationDialog()">Delete</button>
+          </tr>
+          </td>
+          <td style="padding: 20px">
+            <div [hidden]="!loaded" class="alert alert-info text-center">
+              <h4>* You do not have any app created yet</h4>
+            </div>
+            <button md-raised-button color="accent" (click)="openMyDialog()">Create New</button>
+          </td>
+
+          </tr>
+        </table>
+      </md-card-content>
+    </md-card>
+    <div
+      [ngBusy]="{busy: busy, message: 'Loading...', backdrop: true, delay: 200, minDuration: 2000, position: center}"></div>
+  </div>
+</div>
+</div>

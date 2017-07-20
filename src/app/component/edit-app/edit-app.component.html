@@ -1,0 +1,85 @@
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <div [ngBusy]="{busy: busy, message: 'Loading...', backdrop: true, delay: 200, minDuration: 600}"></div>
+  <div class="panel panel-default" style="padding: 20px">
+    <h1 class="card" style="text-align: center; margin-top: auto">Edit App</h1>
+    <hr style="color: #dadada"/>
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col-sm-5 panel panel-default" style="padding: 0; margin-right: 0px">
+          <div class="panel-heading">
+            <h5 class="md-card-left">App Info
+              <div [ngBusy]="busy" *ngIf="appInfo.appname">({{appInfo.appname}})</div>
+            </h5>
+          </div>
+          <div class="panel-body">
+
+            <form [formGroup]="uForm" (ngSubmit)="updateForm()" class="example-full-width">
+
+              <span style="font-weight: bold; margin-bottom: -10px">App Name:</span>
+              <div class="form-control input-group" style="margin: 10px 0 10px 0; padding: 0"
+                   [ngClass]="{'has-error':!uForm.controls['name'].valid && uForm.touched,
+                 'has-success':uForm.controls['name'].valid && uForm.dirty}">
+                <input type="text" class="form-control input-group-lg" placeholder="{{appInfo.appname}}"
+                       [(ngModel)]="name" formControlName="name" style="width: 100%; height: inherit">
+                <div class="alert-danger"
+                     *ngIf="uForm.controls['name'].invalid && uForm.controls['name'].touched">
+                  Enter a name
+                </div>
+              </div>
+              <br xml:space="default"/>
+
+              <span style="padding: 0; font-weight: bold">User Email:</span>
+              <div class="form-control input-group" style="margin: 10px 0 10px 0; padding: 0"
+                   [ngClass]="{'has-error':!uForm.controls['email'].valid && uForm.touched,
+                 'has-success':uForm.controls['email'].valid && uForm.dirty}">
+                <input type="text" class="form-control input-group-lg" placeholder="{{appInfo.email}}"
+                       [(ngModel)]="email" formControlName="email" style="width: 100%; height: inherit">
+                <div class="alert-danger"
+                     *ngIf="uForm.controls['email'].invalid && uForm.controls['email'].touched">
+                  Please enter a valid email
+                </div>
+              </div>
+
+              <!--color picker row-->
+              <!--<div class="row">-->
+
+                <div class="input-group col-xl-9">
+                  <span class="input-group-addon" id="btnGroupAddon">({{appInfo.colour}}) <b>Change color</b></span>
+                  <input [(colorPicker)]="color" [style.background]="color" [value]="color" [cpOKButton]="true"
+                         [cpSaveClickOutside]="false"
+                         [cpFallbackColor]="'#1270cc'" [cpOKButtonClass]="'btn btn-primary btn-xs'"
+                         (click)="onColorSelected(color)"
+                         type="button" class="btn btn-info btn-sm col" aria-describedby="btnGroupAddon" style="margin-left: 5px"/>
+                </div>
+              <!--</div>-->
+            </form>
+          </div>
+        </div>
+
+        <div class="col-sm-1"></div>
+
+        <!--The checkbox column-->
+        <div class="col-sm-6 panel panel-info" style="padding: 0; margin-right: 0px">
+          <div class="panel-heading"><h4>Survey Questions</h4></div>
+          <div class="panel-body">
+            <div *ngFor="let quest of qModel" layout-align="left" style="margin-top: 10px">
+              <md-checkbox [(ngModel)]="SelectionStatusOfQuestion[quest.question]" (change)="imChecked()">
+                {{quest.question}}
+              </md-checkbox>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!--final update button-->
+        <div class="text-center">
+          <button type="button" md-raised-button="" class="btn btn-custom-lg" color="accent"
+                  style="height: 50px; width: auto; margin-top: 60px"
+                  [disabled]="!uForm.valid || submitPending" (click)="updateForm()">
+            <h4>Update App</h4></button>
+        </div>
+
+    </div>
+  </div>
+</div>

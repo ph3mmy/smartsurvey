@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row flex-center">
+    <div class="col-sm-7">
+      <md-card class="card-no-padding">
+        <md-card-header class="card-no-padding" style="background: gainsboro; padding: 10px">
+          <md-card-title><h2>Select your desired Survey Questions</h2></md-card-title>
+        </md-card-header>
+        <div class="question-padding">
+          <div class="md-card-left" *ngFor="let quest of questions">
+            <md-checkbox [(ngModel)]="SelectionStatusOfMutants[quest.question]" (change)="imChecked()">
+              {{quest.question}}
+            </md-checkbox>
+
+          </div>
+        <button md-raised-button color="accent" (click)="updateOptions()" type="submit" [disabled]="submitPending">
+          Submit
+          <span *ngIf="submitPending"
+                class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+        </button>
+    </div>
+
+      </md-card>
+      <div
+        [ngBusy]="{busy: busy, message: 'Loading...', backdrop: true, delay: 200, minDuration: 600, position: center}"></div>
+
+    </div>
+  </div>
+</div>

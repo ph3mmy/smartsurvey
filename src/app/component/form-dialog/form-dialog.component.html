@@ -1,0 +1,50 @@
+<div class="example-full-width">
+  <div md-dialog-title>App Info</div>
+  <br xml:space="default"/>
+
+  <form [formGroup]="rForm" (ngSubmit)="saveForm()" class="example-full-width">
+    <div class="form-group" [ngClass]="{'has-error':!rForm.controls['appNamee'].valid}">
+      <md-input-container class="example-full-width" style="width:100%">
+        <input mdInput type="text" formControlName="appNamee" [(ngModel)]="myAppComponent.appNamee"
+               placeholder="Enter App Name" required>
+      </md-input-container>
+    </div>
+
+    <br xml:space="default"/>
+    <div class="form-group" [ngClass]="{'has-error':!rForm.controls['appColore'].valid}">
+      <div class="btn-group" *ngFor="let mColor of colorArr">
+        <button class="btn btn-primary btn-xs" [ngStyle]="{'background-color':  mColor.cValue, 'margin': '5px'}"
+                value="mColor.value" type="button" (click)="setColor(mColor.cValue)">{{mColor.cName}}
+        </button>
+      </div>
+      <div md-dialog-content="">
+        <md-input-container class="example-full-width" style="width:100%">
+          <input mdInput type="text" formControlName="appColore" [(ngModel)]="myAppComponent.appColore"
+                 [value]="color" placeholder="App Menu Color (#000fff)" readonly>
+        </md-input-container>
+      </div>
+
+      <br xml:space="default"/>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error':!rForm.controls['userEmaile'].valid}">
+      <div md-dialog-content="">
+        <md-input-container class="example-full-width" style="width:100%">
+          <input mdInput type="text" formControlName="userEmaile" [(ngModel)]="myAppComponent.userEmaile"
+                 placeholder="User Email" required>
+        </md-input-container>
+      </div>
+    </div>
+    <br xml:space="default"/>
+
+    <div md-dialog-actions="right" class="md-card-right" align="center">
+      <button  md-raised-button color="primary" class="btn btn-custom-xs" (click)="dialogRef.close()" type="submit"
+              style="margin-right: 20px">Cancel
+      </button>
+      <button md-raised-button color="accent" (click)="saveForm()" type="submit"
+              [disabled]="!rForm.valid">Save
+      </button>
+    </div>
+  </form>
+
+</div>
+
